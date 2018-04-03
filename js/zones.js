@@ -1,5 +1,6 @@
 Zones = function (game) {
   this.game = game;
+  this.anchor = 0;
 
 
   /**
@@ -22,6 +23,8 @@ Zones = function (game) {
       endY: 504,
       color: "brown",
       action: this.game.actions.scene0Door,
+      anchor: 180,
+      stance: 16
     },
 
     {
@@ -38,12 +41,32 @@ Zones = function (game) {
     {
       id: "fridge",
       scene: 0,
-      startX: 468,
-      endX: 585,
+      startX: 488,
+      endX: 530,
       startY: 327,
-      endY: 504,
+      endY: 354,
       color: "yellow",
       action: this.game.actions.scene0Fridge,
+    },
+    {
+      id: "microwave",
+      scene: 0,
+      startX: 341,
+      endX: 398,
+      startY: 395,
+      endY: 428,
+      color: "green",
+      action: this.game.actions.scene0Microwave,
+    },
+    {
+      id: "back",
+      scene: 1,
+      startX: 841,
+      endX: 998,
+      startY: 5,
+      endY: 30,
+      color: "white",
+      action: this.game.actions.back,
     },
   ]
 }
@@ -57,8 +80,10 @@ Zones = function (game) {
 
 Zones.prototype.drawZone = function (startX, endX, startY, endY, color) {
 
+  this.game.ctx.globalAlpha = 1;
   this.game.ctx.fillStyle = color;
   this.game.ctx.fillRect(startX, startY, endX - startX, endY - startY)
+  this.game.ctx.globalAlpha = 1;
 }
 
 // Renders all the zones in the list
@@ -66,6 +91,8 @@ Zones.prototype.renderAll = function () {
   var items = this.zoneList.length;
 
   for (let i = 0; i < items; i++) {
+
+    if (this.zoneList[i].scene === this.game.currentScene){
     this.drawZone(
       this.zoneList[i].startX,
       this.zoneList[i].endX,
@@ -73,7 +100,10 @@ Zones.prototype.renderAll = function () {
       this.zoneList[i].endY,
       this.zoneList[i].color
     )
+    }
+    
   }
+  
 }
 
 /**
@@ -89,22 +119,28 @@ Zones.prototype.checkHit = function (mouseX, mouseY) {
 
   var myMouseX = parseInt(mouseX) - this.game.offsetX;
   var myMouseY = parseInt(mouseY) - this.game.offsetY;
+ 
 
-  console.log("Cursor X: " + myMouseX + " || Y: " + myMouseY);
+  console.log("Cursor X: " + myMouseX + " · Y: " + myMouseY);
 
   for (let i = 0; i < this.zoneList.length; i++) {
     // Click conditions
     if (myMouseX >= this.zoneList[i].startX &&
       myMouseX <= this.zoneList[i].endX &&
       myMouseY >= this.zoneList[i].startY &&
-      myMouseY <= this.zoneList[i].endY
+      myMouseY <= this.zoneList[i].endY &&
+      this.zoneList[i].scene == this.game.currentScene
     )
     // Trigger when element clicked
     {
-   
-    //this.game.hero.walk(myMouseX);
-    this.zoneList[i].action.bind(this).call();
-   
+        if (Math.abs(this.game.hero.x - this.zoneList[i].endX) > Math.abs(this.game.hero.x - this.zoneList[i].startX)){
+          this.anchor = (this.zoneList[i].endX + this.zoneList[i].startX)/2 -80;
+        }
+        else {
+          this.anchor = (this.zoneList[i].endX + this.zoneList[i].startX)/2 - 20;
+        }
+        this.zoneList[i].action.bind(this).call(this.anchor);
+        
     }
   }
 }

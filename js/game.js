@@ -6,6 +6,8 @@ function Game(canvasId) {
   this.offsetX = parseInt(this.canvas.offsetLeft);
   this.offsetY = parseInt(this.canvas.offsetTop);
   this.frameCounter = 0;
+  this.currentScene = 0
+  this.previousScene = 0;
  
   this.reset();
   this.start();
@@ -17,14 +19,16 @@ Game.prototype.reset = function() {
   this.background = new Background(this);
   this.foreground = new Foreground(this);
   this.actions = new Actions(this);
+  this.items = new Items(this);
   this.hero = new Hero(this);
   this.zones = new Zones(this);
-  
+  this.setListener();
+
 };
 
 
 Game.prototype.start = function() { 
-  this.setListener();
+  
   
   var interval = setInterval( function(){
     this.clear();
@@ -55,11 +59,8 @@ Game.prototype.clear = function() {
 };
 
 Game.prototype.draw = function() {
-  this.zones.renderAll();
   this.background.draw();
+  this.zones.renderAll();
   this.hero.draw();
   this.foreground.draw();
-  
-
-  
 }

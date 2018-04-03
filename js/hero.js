@@ -5,21 +5,20 @@ this.game = game;
 this.img = new Image();
 this.img.src = "images/walk.png";
 this.img.frames = 16;
-this.img.frameIndex = 0;
+this.img.frameIndex = 16;
 this.width = 4080;
 this.singleWidth = 240;
 this.singleHeight = 310;
 this.height = 310;
 
-
-this.direction = 0; // 0 is <- Left |||    1 is Right ->
+// 0 is <- Left |||    1 is Right ->
+this.direction = 0; 
 this.walking = false; 
+this.speed = 7;
 
-this.x = 900;
+// Initial position
+this.x = 460;
 this.y = 330;
-
-
-
 }
 
 Hero.prototype.draw = function() {
@@ -36,22 +35,28 @@ Hero.prototype.draw = function() {
  }
 
 
-Hero.prototype.move = function(mouseX) {
+Hero.prototype.move = function() {
   
   // Set direction where the hero is facing
-  if(this.x < mouseX){this.direction = 1;}
-  else{this.direction = 0;}
-
-  // Speed and walk action
-  {
-    this.x -= 7;
-    this.game.hero.walk();
-  }
+  // Left or right depends on this checkpoint:
   
-
+  if(this.x <= this.game.zones.anchor){
+    //console.log("Anchor is: " + this.game.zones.anchor)
+   // console.log("Moving -->")
+    this.direction = 1;
+    this.x += 7;
+    }
+  else{
+    //console.log("Moving <--")
+    //console.log("Anchor is: " + this.game.zones.anchor)
+      this.direction = 0;
+      this.x -= 7;
+      }
   
-  if (this.x <= 220){
-    console.log("stopping");
+  // Start animation    
+  this.game.hero.walk();
+  
+  if (Math.abs(this.x - this.game.zones.anchor) < 4){
     this.stopWalk();
   }
 }
@@ -62,8 +67,12 @@ Hero.prototype.walk = function () {
 }
 
 Hero.prototype.stopWalk = function (moveInterval) {
-  console.log("stopping");
+  console.log("stopping...");
   this.walking = false;
   this.img.frameIndex = 16;
+  eval(this.game.actions.callback);
+  eval(this.game.actions.updateSubtitles);
+  this.game.actions.reset();
+
 }
 

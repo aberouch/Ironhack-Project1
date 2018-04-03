@@ -16,14 +16,9 @@ Foreground.prototype.changeBackground = function(id) {
   var backgroundCollection= [
     {
       id: "00",
-      name: "living room dark",
+      name: "kitchen furnitures",
       src: "images/scene00.png"
     },
-    {
-      id: "01",
-      name: "living room light",
-      src: "images/scene01.png"
-    }
   ];
 
   this.img.src  = backgroundCollection[sceneId].src;
