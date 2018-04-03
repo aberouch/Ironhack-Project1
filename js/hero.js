@@ -17,8 +17,8 @@ this.walking = false;
 this.speed = 7;
 
 // Initial position
-this.x = 460;
-this.y = 330;
+this.x = 860;
+this.y = 328;
 }
 
 Hero.prototype.draw = function() {
@@ -69,10 +69,24 @@ Hero.prototype.walk = function () {
 Hero.prototype.stopWalk = function (moveInterval) {
   console.log("stopping...");
   this.walking = false;
-  this.img.frameIndex = 16;
+  if (this.game.actions.prepareToHideFront === true){
+      this.game.hero.hideHero();
+      this.game.foregroundElements = false;
+  }
+  else {
+    this.game.hero.showHero();
+  }
   eval(this.game.actions.callback);
   eval(this.game.actions.updateSubtitles);
   this.game.actions.reset();
 
+}
+
+Hero.prototype.hideHero = function() {
+  this.img.frameIndex = 17;
+}
+
+Hero.prototype.showHero = function() {
+  this.img.frameIndex = 16;
 }
 

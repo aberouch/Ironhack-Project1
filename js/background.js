@@ -32,7 +32,28 @@ Background.prototype.changeBackground = function(id) {
       id: "02",
       name: "microwave closed",
       src: "images/microwave.png",
-    }
+    },
+    {
+      id: "03",
+      name: "maze kernels",
+      src: "images/scene00_kernels.png",
+    },
+    {
+      id: "04",
+      name: "no kernels",
+      src: "images/scene00_nokernels.png",
+    },
+    {
+      id: "05",
+      name: "closed microwave",
+      src: "images/scene02_closedmic.png",
+    },
+    {
+      id: "06",
+      name: "open microwave",
+      src: "images/scene02_openmic.png",
+    },
+
   ];
   
   this.previousBackground = this.currentBackground;

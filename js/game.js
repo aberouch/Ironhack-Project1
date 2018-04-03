@@ -8,6 +8,7 @@ function Game(canvasId) {
   this.frameCounter = 0;
   this.currentScene = 0
   this.previousScene = 0;
+  this.foregroundElements = true;
  
   this.reset();
   this.start();
@@ -59,8 +60,13 @@ Game.prototype.clear = function() {
 };
 
 Game.prototype.draw = function() {
-  this.background.draw();
   this.zones.renderAll();
+  this.background.draw();
   this.hero.draw();
-  this.foreground.draw();
+  this.items.draw();
+  if (this.foregroundElements === true){
+    this.hero.draw();
+    this.foreground.draw();
+  }
+
 }

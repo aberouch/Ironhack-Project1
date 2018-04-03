@@ -11,22 +11,8 @@ this. y = 0;
 }
 
 
-Foreground.prototype.changeBackground = function(id) {
-  var sceneId = id;
-  var backgroundCollection= [
-    {
-      id: "00",
-      name: "kitchen furnitures",
-      src: "images/scene00.png"
-    },
-  ];
-
-  this.img.src  = backgroundCollection[sceneId].src;
-}
-
 
 Foreground.prototype.draw = function (){
 this.game.ctx.drawImage(this.img, 618,404);
-  
 }
 

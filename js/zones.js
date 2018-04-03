@@ -23,8 +23,7 @@ Zones = function (game) {
       endY: 504,
       color: "brown",
       action: this.game.actions.scene0Door,
-      anchor: 180,
-      stance: 16
+      back: false,
     },
 
     {
@@ -36,6 +35,7 @@ Zones = function (game) {
       endY: 418,
       color: "darkblue",
       action: this.game.actions.scene0Lightswitch,
+      back: false,
     },
 
     {
@@ -47,6 +47,7 @@ Zones = function (game) {
       endY: 354,
       color: "yellow",
       action: this.game.actions.scene0Fridge,
+      back: false,
     },
     {
       id: "microwave",
@@ -57,6 +58,29 @@ Zones = function (game) {
       endY: 428,
       color: "green",
       action: this.game.actions.scene0Microwave,
+      back: true,
+    },
+    {
+      id: "bowl",
+      scene: 0,
+      startX: 670,
+      endX: 705,
+      startY: 425,
+      endY: 440,
+      color: "gold",
+      action: this.game.actions.scene0Bowl,
+      back: true,
+    },
+    {
+      id: "window",
+      scene: 0,
+      startX: 601,
+      endX: 940,
+      startY: 367,
+      endY: 375,
+      color: "aqua",
+      action: this.game.actions.scene0Window,
+      back: false,
     },
     {
       id: "back",
@@ -68,6 +92,16 @@ Zones = function (game) {
       color: "white",
       action: this.game.actions.back,
     },
+    {
+      id: "popcorn",
+      scene: 1,
+      startX: 490,
+      endX: 568,
+      startY: 333,
+      endY: 385,
+      color: "gold",
+      action: this.game.actions.scene0Maze,
+    },
   ]
 }
 
@@ -77,6 +111,9 @@ Zones = function (game) {
  * Also, it can take a color parameter
  * renderAll(): draws all the elements in zoneLise[]
  */
+Zones.prototype.activateBack = function(newScene){
+  this.zoneList[6].scene = newScene;
+}
 
 Zones.prototype.drawZone = function (startX, endX, startY, endY, color) {
 
