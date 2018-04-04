@@ -53,6 +53,24 @@ Background.prototype.changeBackground = function(id) {
       name: "open microwave",
       src: "images/scene02_openmic.png",
     },
+    {
+      id: "07",
+      name: "closed cabinet",
+      src: "images/scene04_closedcabinet.png",
+    },
+
+    {
+      id: "08",
+      name: "open cabinet",
+      src: "images/scene04_opencabinet.png",
+    },
+
+    {
+      id: "09",
+      name: "missing bowl",
+      src: "images/scene04_missingcabinet.png",
+    },
+
 
   ];
   

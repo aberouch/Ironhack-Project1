@@ -9,14 +9,14 @@ function Game(canvasId) {
   this.currentScene = 0
   this.previousScene = 0;
   this.foregroundElements = true;
- 
+
   this.reset();
   this.start();
-  
+
 }
 
 
-Game.prototype.reset = function() {
+Game.prototype.reset = function () {
   this.background = new Background(this);
   this.foreground = new Foreground(this);
   this.actions = new Actions(this);
@@ -28,45 +28,44 @@ Game.prototype.reset = function() {
 };
 
 
-Game.prototype.start = function() { 
-  
-  
-  var interval = setInterval( function(){
-    this.clear();
-    this.draw(); 
+Game.prototype.start = function () {
 
-    if (this.hero.walking == true){
+
+  var interval = setInterval(function () {
+    this.clear();
+    this.draw();
+
+    if (this.hero.walking == true) {
       this.hero.move(200);
     }
 
     // This is used to sync the hero (15fps)
-    if (this.frameCounter <= this.hero.img.frames - 2){
+    if (this.frameCounter <= this.hero.img.frames - 2) {
       this.frameCounter++;
+    } else {
+      this.frameCounter = 0;
     }
-    else {this.frameCounter = 0;}
-  }.bind(this),100)
-   
+  }.bind(this), 100)
+
 }
 
-Game.prototype.setListener = function() {
-  this.canvas.addEventListener('click', function(event){
-  this.zones.checkHit(event.clientX , event.clientY);  
+Game.prototype.setListener = function () {
+  this.canvas.addEventListener('click', function (event) {
+    this.zones.checkHit(event.clientX, event.clientY);
   }.bind(this))
 }
 
 
-Game.prototype.clear = function() {
+Game.prototype.clear = function () {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 };
 
-Game.prototype.draw = function() {
+Game.prototype.draw = function () {
   this.zones.renderAll();
   this.background.draw();
   this.hero.draw();
-  this.items.draw();
-  if (this.foregroundElements === true){
+  if (this.foregroundElements === true) {
     this.hero.draw();
     this.foreground.draw();
   }
-
 }

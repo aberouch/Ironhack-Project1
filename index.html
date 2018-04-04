@@ -6,17 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Game project</title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   
   
 </head>
 
 <body>
-  <div class="screen">
-    <canvas id="myCanvas" width="1000" height="563" style="border:1px solid #000000;">
-    </canvas>
-    <div id="subtitles"></div>
-    
-  </div>  
+  <div class="container">
+    <div class="inventory">
+        <div data-selected="false" class="not-owned" id="corn"><img src="images/items/corn.png" alt="Un puñado de maíz"></div>
+        <div data-selected="false" class="not-owned" id="bowl"><img src="images/items/bowl.png" alt="Un bol azul"></div>
+    </div>
+    <div class="screen">
+      <canvas id="myCanvas" width="1000" height="563" style="border:1px solid #000000;">
+      </canvas>
+      <div id="subtitles"></div>
+      
+    </div>  
+  </div>
   
   <script src="js/hero.js"></script>
   <script src="js/items.js"></script>

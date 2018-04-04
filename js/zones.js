@@ -3,6 +3,7 @@ Zones = function (game) {
   this.anchor = 0;
 
 
+
   /**
    * LIST OF CLICKABLE ZONES
    * A zone must include a name (id) and the (scene) in which it's used
@@ -12,8 +13,16 @@ Zones = function (game) {
    * Action is the name of the function to load on click
    */
 
-  this.zoneList = [
-
+  this.zoneList = [{
+      id: "back",
+      scene: 1,
+      startX: 841,
+      endX: 998,
+      startY: 5,
+      endY: 30,
+      color: "black",
+      action: this.game.actions.back,
+    },
     {
       id: "door",
       scene: 0,
@@ -21,7 +30,7 @@ Zones = function (game) {
       endX: 186,
       startY: 292,
       endY: 504,
-      color: "brown",
+      color: "black",
       action: this.game.actions.scene0Door,
       back: false,
     },
@@ -33,7 +42,7 @@ Zones = function (game) {
       endX: 238,
       startY: 394,
       endY: 418,
-      color: "darkblue",
+      color: "black",
       action: this.game.actions.scene0Lightswitch,
       back: false,
     },
@@ -45,7 +54,7 @@ Zones = function (game) {
       endX: 530,
       startY: 327,
       endY: 354,
-      color: "yellow",
+      color: "black",
       action: this.game.actions.scene0Fridge,
       back: false,
     },
@@ -56,8 +65,8 @@ Zones = function (game) {
       endX: 398,
       startY: 395,
       endY: 428,
-      color: "green",
-      action: this.game.actions.scene0Microwave,
+      color: "black",
+      action: this.game.actions.scene2Microwave,
       back: true,
     },
     {
@@ -67,30 +76,31 @@ Zones = function (game) {
       endX: 705,
       startY: 425,
       endY: 440,
-      color: "gold",
+      color: "black",
       action: this.game.actions.scene0Bowl,
       back: true,
     },
     {
       id: "window",
       scene: 0,
-      startX: 601,
-      endX: 940,
-      startY: 367,
-      endY: 375,
-      color: "aqua",
+      startX: 592,
+      endX: 955,
+      startY: 237,
+      endY: 355,
+      color: "black",
       action: this.game.actions.scene0Window,
       back: false,
     },
     {
-      id: "back",
-      scene: 1,
-      startX: 841,
-      endX: 998,
-      startY: 5,
-      endY: 30,
-      color: "white",
-      action: this.game.actions.back,
+      id: "cupboard",
+      scene: 0,
+      startX: 398,
+      endX: 455,
+      startY: 450,
+      endY: 490,
+      color: "black",
+      action: this.game.actions.scene4cupboard,
+      back: false,
     },
     {
       id: "popcorn",
@@ -99,10 +109,52 @@ Zones = function (game) {
       endX: 568,
       startY: 333,
       endY: 385,
-      color: "gold",
+      color: "black",
       action: this.game.actions.scene0Maze,
     },
-  ]
+    {
+      id: "open microwave",
+      scene: 2,
+      startX: 755,
+      endX: 835,
+      startY: 418,
+      endY: 446,
+      color: "black",
+      action: this.game.actions.scene2MicrowaveOpen,
+    },
+    {
+      id: "insert microwave",
+      scene: 3,
+      startX: 300,
+      endX: 603,
+      startY: 334,
+      endY: 400,
+      color: "black",
+      action: this.game.actions.scene2MicrowaveInsert,
+    },
+    {
+      id: "open cabinet",
+      scene: 4,
+      startX: 500,
+      endX: 550,
+      startY: 150,
+      endY: 370,
+      color: "black",
+      action: this.game.actions.scene4CupboardOpen,
+    },
+    {
+      id: "pick bowl",
+      scene: 5,
+      startX: 560,
+      endX: 690,
+      startY: 220,
+      endY: 300,
+      color: "black",
+      action: this.game.actions.scene4CupboardPick,
+    },
+  ];
+
+
 }
 
 /**
@@ -111,7 +163,8 @@ Zones = function (game) {
  * Also, it can take a color parameter
  * renderAll(): draws all the elements in zoneLise[]
  */
-Zones.prototype.activateBack = function(newScene){
+
+Zones.prototype.activateBack = function (newScene) {
   this.zoneList[6].scene = newScene;
 }
 
@@ -129,19 +182,18 @@ Zones.prototype.renderAll = function () {
 
   for (let i = 0; i < items; i++) {
 
-    if (this.zoneList[i].scene === this.game.currentScene){
-    this.drawZone(
-      this.zoneList[i].startX,
-      this.zoneList[i].endX,
-      this.zoneList[i].startY,
-      this.zoneList[i].endY,
-      this.zoneList[i].color
-    )
+    if (this.zoneList[i].scene === this.game.currentScene) {
+      this.drawZone(
+        this.zoneList[i].startX,
+        this.zoneList[i].endX,
+        this.zoneList[i].startY,
+        this.zoneList[i].endY,
+        this.zoneList[i].color
+      )
     }
-    
   }
-  
 }
+
 
 /**
  * COLLISION CHECK
@@ -156,7 +208,7 @@ Zones.prototype.checkHit = function (mouseX, mouseY) {
 
   var myMouseX = parseInt(mouseX) - this.game.offsetX;
   var myMouseY = parseInt(mouseY) - this.game.offsetY;
- 
+
 
   console.log("Cursor X: " + myMouseX + " · Y: " + myMouseY);
 
@@ -170,14 +222,13 @@ Zones.prototype.checkHit = function (mouseX, mouseY) {
     )
     // Trigger when element clicked
     {
-        if (Math.abs(this.game.hero.x - this.zoneList[i].endX) > Math.abs(this.game.hero.x - this.zoneList[i].startX)){
-          this.anchor = (this.zoneList[i].endX + this.zoneList[i].startX)/2 -80;
-        }
-        else {
-          this.anchor = (this.zoneList[i].endX + this.zoneList[i].startX)/2 - 20;
-        }
-        this.zoneList[i].action.bind(this).call(this.anchor);
-        
+      if (Math.abs(this.game.hero.x - this.zoneList[i].endX) > Math.abs(this.game.hero.x - this.zoneList[i].startX)) {
+        this.anchor = (this.zoneList[i].endX + this.zoneList[i].startX) / 2 - 80;
+      } else {
+        this.anchor = (this.zoneList[i].endX + this.zoneList[i].startX) / 2 - 20;
+      }
+      this.zoneList[i].action.bind(this).call(this.anchor);
+
     }
   }
 }
