@@ -86,6 +86,17 @@ Background.prototype.changeBackground = function(id) {
       name: "birdhouse",
       src: "images/scene8_birdhouse.png",
     },
+    {
+      id: "13",
+      name: "birdhouse+bowl",
+      src: "images/scene8_birdhouse_bowl.png",
+    },
+    {
+      id: "14",
+      name: "birdhouse+bowl+pop",
+      src: "images/scene8_birdhouse_pop.png",
+    },
+
 
 
 

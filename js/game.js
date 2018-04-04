@@ -68,8 +68,8 @@ Game.prototype.clear = function () {
 };
 
 Game.prototype.draw = function () {
-  this.zones.renderAll();
   this.background.draw();
+  this.zones.renderAll();
   this.hero.draw();
   if (this.foregroundElements === true) {
     this.hero.draw();

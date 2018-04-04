@@ -30,6 +30,12 @@ Items = function (game) {
       scene: 01,
       owned: false,
       src: 'images/items/pop.png',
+    },
+    {
+      name: '#key',
+      scene: 01,
+      owned: false,
+      src: 'images/items/key.png',
     }
   ];
 }
@@ -53,9 +59,6 @@ Items.prototype.removeItem = function (itemName) {
     }
   }
 }
-
-
-
 
 /**
 * INVENTORY UI AND DOM MANIPULATION

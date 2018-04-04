@@ -127,7 +127,7 @@
   // Walk: Fridge picture
 
   Actions.prototype.scene0Fridge = function () {
-    this.game.currentScene = 0;
+    this.game.currentScene = 2;
     this.game.zones.zoneList[0].scene = this.game.currentScene;
     this.game.actions.callback = "this.game.background.changeBackground(11);"
     this.game.actions.prepareToHideFront = true;
@@ -222,22 +222,56 @@
     
   }
 
+  // Walk: Approaching the birdhouse
   Actions.prototype.scene7Birdhouse = function () {
-    if(this.game.items.inventory[1].owned === true){
-        say("Listo para poner el bol.")
+    if(this.game.items.inventory[3].owned === true){
+        say("Ya he recuperado la llave! Este Flynn...")
     }
     else{
-      this.game.currentScene = 7;
+      this.game.currentScene = 8;
       this.game.zones.zoneList[0].scene = this.game.currentScene;
       this.game.actions.callback = "this.game.background.changeBackground(12);"
       this.game.actions.prepareToHideFront = true;
       this.game.hero.move();
       this.game.actions.updateSubtitles =
-      "document.getElementById(\"subtitles\").innerHTML =\"Es igual que los gatos. Si no hay comida, pasa de venir...\"";
+      "document.getElementById(\"subtitles\").innerHTML =\"Si no hay comida servida en pocerlana, nunca viene.\"";
+    }
+  }
+
+  // Interaction: with the birdhouse
+  Actions.prototype.scene8BirdhouseBowl = function () {
+    this.game.currentScene = 8;
+    this.game.zones.zoneList[0].scene = this.game.currentScene;
+    
+    if (this.game.items.inventory[1].owned === true && this.game.items.inventory[2].owned === true){
+      
+      if($("#pop").hasClass("selected")){
+          this.game.background.changeBackground(14);
+          this.game.items.removeItem("#pop");
+          this.game.items.removeItem("#bowl");
+          say("¡El desayuno está servido, Flynn!");
+      }
+      
+      if($("#bowl").hasClass("selected")){
+          this.game.background.changeBackground(13);
+          this.game.items.removeItem("#bowl");
+          say("...y ahora la comida.");
+      }
+      this.game.background.previousBackground = "images/scene00.png";
+      this.game.background.draw();
+    }
+
+    
+    if (this.game.items.inventory[1].owned === false || this.game.items.inventory[2].owned === false){
+      this.game.background.changeBackground(12);
+      this.game.background.previousBackground = "images/scene00.png";
+      this.game.background.draw();
+      say("Comida y recipiente. Siempre.");
     }
   }
 
 
+  
   function say(string) {
     document.getElementById("subtitles").innerHTML = string;
   }

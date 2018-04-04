@@ -172,6 +172,26 @@ Zones = function (game) {
       color: "black",
       action: this.game.actions.scene7Birdhouse,
     },
+    {
+      id: "birdhouse bowl",
+      scene: 8,
+      startX: 480,
+      endX: 800,
+      startY: 438,
+      endY: 555,
+      color: "blue",
+      action: this.game.actions.scene8BirdhouseBowl,
+    },
+    {
+      id: "birdhouse bowl",
+      scene: 9,
+      startX: 480,
+      endX: 800,
+      startY: 438,
+      endY: 555,
+      color: "gold",
+      action: this.game.actions.scene8BirdhouseBowl,
+    },
   ];
 
 
