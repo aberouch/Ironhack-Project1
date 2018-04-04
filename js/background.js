@@ -4,6 +4,7 @@ Background = function (game) {
 this.game = game;
 this.img = new Image();
 
+// Initial background
 this.img.src = "images/scene00.png";
 this.x = 0;
 this. y = 0;
@@ -70,6 +71,22 @@ Background.prototype.changeBackground = function(id) {
       name: "missing bowl",
       src: "images/scene04_missingcabinet.png",
     },
+    {
+      id: "10",
+      name: "popped corn",
+      src: "images/scene02_popmic.png",
+    },
+    {
+      id: "11",
+      name: "frige picture",
+      src: "images/scene7_fridge.png",
+    },
+    {
+      id: "12",
+      name: "birdhouse",
+      src: "images/scene8_birdhouse.png",
+    },
+
 
 
   ];

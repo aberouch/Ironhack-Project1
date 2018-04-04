@@ -12,7 +12,6 @@ function Game(canvasId) {
 
   this.reset();
   this.start();
-
 }
 
 
@@ -28,26 +27,34 @@ Game.prototype.reset = function () {
 };
 
 
-Game.prototype.start = function () {
 
+Game.prototype.start = function () {
+// Interval that refreshes the canvas and makes the hero move.
 
   var interval = setInterval(function () {
     this.clear();
     this.draw();
 
     if (this.hero.walking == true) {
-      this.hero.move(200);
+        this.hero.move();
     }
-
-    // This is used to sync the hero (15fps)
+    
     if (this.frameCounter <= this.hero.img.frames - 2) {
       this.frameCounter++;
-    } else {
+    }
+    else {
       this.frameCounter = 0;
     }
   }.bind(this), 100)
 
 }
+
+/**
+* CLICK LISTENER
+* When a click happens, coordinates are
+* sent to zones.checkhit(x,y) to match them
+* with active clickable areas in (zoneList[]).
+*/
 
 Game.prototype.setListener = function () {
   this.canvas.addEventListener('click', function (event) {
