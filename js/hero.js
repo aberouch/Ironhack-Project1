@@ -101,6 +101,10 @@
     
     eval(this.game.actions.callback);
     eval(this.game.actions.updateSubtitles);
+    if (this.game.actions.appearFromBorder === true){
+      this.x = 1100;
+      this.game.actions.appearFromBorder = false;
+    }
     this.game.actions.reset();
 
   }

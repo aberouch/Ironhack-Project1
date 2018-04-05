@@ -352,6 +352,20 @@
           alert("Contraseña errónea")
         }
       }
+
+      Actions.prototype.scene25poster= function () {
+        this.game.currentScene = 99;
+        this.game.zones.zoneList[23].scene = this.game.currentScene;
+        this.game.actions.callback = "this.game.background.changeBackground(21);"
+        this.game.actions.prepareToHideFront = true;
+        if (this.appearFromBorder === true){
+          this.game.hero.x = 1040;
+          this.appearFromBorder = false;
+        }
+        this.game.hero.move();
+        this.game.actions.updateSubtitles =
+          "document.getElementById(\"subtitles\").innerText =\"Lista de todas las reparaciones que se han realizado. Menudo rollo.\"";
+      }
 /**
    * BACK BUTTON 2 
    * Save which was the previous scene and restores the main scene
