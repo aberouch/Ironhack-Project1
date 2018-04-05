@@ -101,6 +101,26 @@ Background.prototype.changeBackground = function(id) {
       name: "birdhouse+bird",
       src: "images/scene8_birdhouse_bird.png",
     },
+    {
+      id: "16",
+      name: "corridor",
+      src: "images/scene10.png",
+    },
+    {
+      id: "17",
+      name: "coffee",
+      src: "images/scene11_cafe.png",
+    },
+    {
+      id: "18",
+      name: "pannel",
+      src: "images/scene12_alert.png",
+    },
+    {
+      id: "19",
+      name: "elevatorQR",
+      src: "images/scene13_qr.png",
+    },
 
 
 

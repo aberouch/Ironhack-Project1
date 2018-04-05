@@ -10,6 +10,7 @@
     this.callback = "";
     this.subs = "";
     this.prepareToHideFront = false;
+    this.appearFromBorder = false;
   }
 
 
@@ -280,10 +281,96 @@
   }
 
   Actions.prototype.scene20Exit = function(){
-    this.game.items.addItem('#key');
-    this.game.background.changeBackgroundLater(20,100,20);
+    if($("#pop").hasClass("selected")){
+      this.game.currentScene = 20;
+    this.game.actions.callback = "this.game.background.changeBackground(16);"
+    this.game.actions.prepareToHideFront = true;
+    this.appearFromBorder = true;
+    this.game.hero.move();
+    this.game.actions.updateSubtitles =
+    "document.getElementById(\"subtitles\").innerHTML =\"Voy a llegar super tarde... <br>Espero que el ascensor esté arreglado\"";
+    this.game.items.removeItem("#key");
+    this.game.hero.showHero();
+    }
+  }
+
+    Actions.prototype.scene21coffee = function () {
+      this.game.currentScene = 24;
+      this.game.zones.zoneList[23].scene = this.game.currentScene;
+      this.game.actions.callback = "this.game.background.changeBackground(17);"
+      this.game.actions.prepareToHideFront = true;
+      if (this.appearFromBorder === true){
+        this.game.hero.x = 1040;
+        this.appearFromBorder = false;
+      }
+      this.game.hero.move();
+      this.game.actions.updateSubtitles =
+        "document.getElementById(\"subtitles\").innerText =\"El que viene a reparar los ascensores es un sinvergüenza\"";
+    }
+
+    Actions.prototype.scene22pannel= function () {
+      this.game.currentScene = 25;
+      this.game.zones.zoneList[23].scene = this.game.currentScene;
+      this.game.actions.callback = "this.game.background.changeBackground(18);"
+      this.game.actions.prepareToHideFront = true;
+      if (this.appearFromBorder === true){
+        this.game.hero.x = 1040;
+        this.appearFromBorder = false;
+      }
+      this.game.hero.move();
+      this.game.actions.updateSubtitles =
+        "document.getElementById(\"subtitles\").innerText =\"Si supiera el código de desbloqueo no tendría que bajar 40 pisos andando\"";
+    }
+
+   
+    Actions.prototype.scene23elevatordoor = function () {
+      this.game.currentScene = 24;
+      this.game.zones.zoneList[23].scene = this.game.currentScene;
+      this.game.actions.callback = "this.game.background.changeBackground(19);"
+      this.game.actions.prepareToHideFront = true;
+      if (this.appearFromBorder === true){
+        this.game.hero.x = 1040;
+        this.appearFromBorder = false;
+      }
+      this.game.hero.move();
+        this.game.actions.updateSubtitles =
+          "document.getElementById(\"subtitles\").innerHTML =\"La puerta ya cierra pero se han olvidado de activarlo\"";
+      }
+
+      Actions.prototype.scene24bypass= function () {
+        var n = prompt("Nombre del empleado")
+        var x = prompt("Código de desbloqueo");
+        var arr = "abcdefghijklmnopqrstuvwxyz".split("");
+        var code = parseInt(n.replace(/[a-z]/ig, function(m){ return arr.indexOf(m.toLowerCase()) + 1 }))
+        code *= 17;
+        if (x == 45191315144*17){
+          this.game.background.changeBackgroundLater(00,00,16);
+        }
+        else{
+          say("Error...")
+          alert("Contraseña errónea")
+        }
+      }
+/**
+   * BACK BUTTON 2 
+   * Save which was the previous scene and restores the main scene
+   * Restores foreground elements
+   * Restores hero visibility
+   */
+
+  Actions.prototype.back2 = function () {
+
+    // Switch scenes
     this.game.currentScene = 20;
-}
+    this.game.foregroundElements = false;
+    this.game.actions.prepareToHideFront = false;
+    this.game.hero.showHero();
+    this.game.background.changeBackground(16)
+    this.game.background.draw();
+    say("");
+  }
+
+ 
 
   
   function say(string) {

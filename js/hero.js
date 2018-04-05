@@ -112,3 +112,8 @@
   Hero.prototype.showHero = function () {
     this.img.frameIndex = 16;
   }
+
+  Hero.prototype.resetHero = function () {
+    this.x = 1100;
+    this.img.frameIndex = 16;
+  }
