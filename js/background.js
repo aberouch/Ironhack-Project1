@@ -121,6 +121,11 @@ Background.prototype.changeBackground = function(id) {
       name: "elevatorQR",
       src: "images/scene13_qr.png",
     },
+    {
+      id: "20",
+      name: "elevatorQR",
+      src: "images/win.png",
+    },
 
 
 

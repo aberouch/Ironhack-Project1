@@ -344,7 +344,8 @@
         var code = parseInt(n.replace(/[a-z]/ig, function(m){ return arr.indexOf(m.toLowerCase()) + 1 }))
         code *= 17;
         if (x == 45191315144*17){
-          this.game.background.changeBackgroundLater(00,00,16);
+          this.game.background.changeBackgroundLater(20,600,99);
+          say("Gracias por jugar :) <br> Abdallah Aberouch - Ironhack 2018.")
         }
         else{
           say("Error...")
