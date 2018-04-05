@@ -219,7 +219,6 @@
     this.game.background.previousBackground = "images/scene00.png";
     this.game.background.draw();
     say("El preferido de Flynn. Probablemente por el brillo de su esmalte.<br>Has cogido el <b class=\"item\">bol azul</b>");
-    
   }
 
   // Walk: Approaching the birdhouse
@@ -250,6 +249,7 @@
           this.game.items.removeItem("#pop");
           this.game.items.removeItem("#bowl");
           say("¡El desayuno está servido, Flynn!");
+          this.game.background.changeBackgroundLater(15,1000,10);
       }
       
       if($("#bowl").hasClass("selected")){
@@ -270,6 +270,20 @@
     }
   }
 
+  Actions.prototype.scene15TakeKey = function(){
+    this.game.items.addItem('#key');
+    this.game.background.changeBackgroundLater(00,00,16);
+    this.game.currentScene = 16;
+    say("Al final voy a llegar tarde...")
+    this.game.actions.back();
+
+  }
+
+  Actions.prototype.scene20Exit = function(){
+    this.game.items.addItem('#key');
+    this.game.background.changeBackgroundLater(20,100,20);
+    this.game.currentScene = 20;
+}
 
   
   function say(string) {

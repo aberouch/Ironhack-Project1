@@ -192,6 +192,27 @@ Zones = function (game) {
       color: "gold",
       action: this.game.actions.scene8BirdhouseBowl,
     },
+    {
+      id: "birdhouse bowl",
+      scene: 10,
+      startX: 480,
+      endX: 800,
+      startY: 438,
+      endY: 555,
+      color: "gold",
+      action: this.game.actions.scene15TakeKey,
+    },
+    {
+      id: "door_exit",
+      scene: 16,
+      startX: 77,
+      endX: 186,
+      startY: 292,
+      endY: 504,
+      color: "red",
+      action: this.game.actions.scene20Exit,
+      back: false,
+    },
   ];
 
 

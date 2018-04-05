@@ -96,6 +96,11 @@ Background.prototype.changeBackground = function(id) {
       name: "birdhouse+bowl+pop",
       src: "images/scene8_birdhouse_pop.png",
     },
+    {
+      id: "15",
+      name: "birdhouse+bird",
+      src: "images/scene8_birdhouse_bird.png",
+    },
 
 
 
@@ -107,6 +112,16 @@ Background.prototype.changeBackground = function(id) {
   this.currentBackground  = this.img.src;
 }
 
+
+// Used to change background automatically after some time.
+Background.prototype.changeBackgroundLater = function(id, time, scene){
+  setTimeout( function(){
+    this.game.background.changeBackground(id)
+    this.game.currentScene = scene;
+  }.bind(this),time);
+
+}
+    
 
 Background.prototype.draw = function (){
 
