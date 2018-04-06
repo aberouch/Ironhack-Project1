@@ -16,10 +16,10 @@ Zones = function (game) {
   this.zoneList = [{
       id: "back",
       scene: 1,
-      startX: 841,
+      startX: 831,
       endX: 998,
       startY: 5,
-      endY: 30,
+      endY: 50,
       color: "black",
       action: this.game.actions.back,
     },
